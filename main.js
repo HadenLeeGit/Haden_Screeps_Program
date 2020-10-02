@@ -6,7 +6,7 @@
     <main>
     main js
     Version 0.1.3
-    
+
 */
 
 var roleHarvester = require('role.harvester');
