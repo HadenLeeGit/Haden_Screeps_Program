@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-	Version 0.3.0
+	Version 0.4.0
 	
 	<role>
 	"Upgrader"
@@ -38,7 +38,7 @@ var roleUpgrader = {
             }
         }
         else {
-            var sources = creep.room.find(FIND_SOURCES);
+            var sources = creep.room.find(FIND_SOURCES_ACTIVE);
             if(creep.harvest(sources[upgradersSource]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[upgradersSource], {visualizePathStyle: {stroke: '#ffaa00'}});
             }

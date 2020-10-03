@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-    Version 0.3.0
+    Version 0.4.0
 	
     <role>
     "healer"
@@ -19,12 +19,14 @@ var roleHealer = {
                 return object.hits < object.hitsMax;
             }
         });
-        targets.sort((a, b) => a.hits - b.hits);
-        if (targets.length) {
-            if (creep.heal(targets[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#0000FF' }});
+        if (targets != null) {
+            targets.sort((a, b) => a.hits - b.hits); if (targets.length) {
+                if (creep.heal(targets[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#0000FF' } });
+                }
             }
         }
+
 
     }
 };
