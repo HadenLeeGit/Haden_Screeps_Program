@@ -1,7 +1,7 @@
 /*
 
     Haden's Screeps program
-    Version 0.2.0
+    Version 0.3.0
 
     <main>
     main js
@@ -13,6 +13,9 @@ var roleHarvester = require('./role.harvester');
 var roleUpgrader = require('./role.upgrader');
 var roleBuilder = require('./role.builder');
 var roleRepairer = require('./role.repairer');
+var roleDefender = require('./role.defender');
+var roleHealer = require('./role.healer');
+
 
 module.exports.loop = function () {
 
@@ -23,12 +26,16 @@ module.exports.loop = function () {
         1. harvester
         2. upgrader
         3. builder
-        4. repairer
+        4. defender
+        5. repairer / healer
     */
     var harvestersNum = 3;
     var upgradersNum = 2;
     var buildersNum = 3;
+    var defendersNum = 2;
+    var healersNum = 1;
     var repairersNum = 2;
+
 
     // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify
@@ -40,8 +47,15 @@ module.exports.loop = function () {
     //builder type modify
     var builderType = [WORK, WORK, CARRY, MOVE];
 
+    //defender type modify
+    var defenderType = [TOUGH, ATTACK, ATTACK, MOVE, MOVE];
+    
+    //healer type modify
+    var healerType = [TOUGH, HEAL, MOVE, MOVE];
+    
     //repairer type modify
     var repairerType = [WORK, CARRY, MOVE, MOVE];
+
 
 //=======================THE END=======================
 
@@ -102,6 +116,28 @@ module.exports.loop = function () {
             { memory: { role: 'builder' } });
     }
 
+    //keep alive defender creeps not less than number in console.
+    var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
+    console.log('Defenders: ' + defenders.length);
+
+    if (defenders.length < defendersNum && harvesters.length > 1 && upgraders.length > 1) {
+        var newName = 'Defender' + Game.time;
+        console.log('Spawning new defender: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(defenderType, newName,
+            { memory: { role: 'defender' } });
+    }
+
+    //keep alive healer creeps not less than number in console.
+    var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healer');
+    console.log('Healers: ' + healers.length);
+
+    if (healers.length < healersNum && harvesters.length > 1 && upgraders.length > 1) {
+        var newName = 'Healer' + Game.time;
+        console.log('Spawning new Healer: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(healerType, newName,
+            { memory: { role: 'healer' } });
+    }
+
     //keep alive repairer creeps not less than number in console.
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     console.log('Repairers: ' + repairers.length);
@@ -135,6 +171,12 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+        }
+        if (creep.memory.role == 'defender') {
+            roleDefender.run(creep);
+        }
+        if (creep.memory.role == 'healer') {
+            roleHealer.run(creep);
         }
         if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);

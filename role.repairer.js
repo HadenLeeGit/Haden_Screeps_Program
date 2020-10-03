@@ -1,10 +1,10 @@
 /*
 	Haden's Screeps program
-	Version 0.2.0
+	Version 0.3.0
 	
 	<role>
 	"repairer"
-	Version 0.0.1
+	Version 0.1.0
 
 */
 
