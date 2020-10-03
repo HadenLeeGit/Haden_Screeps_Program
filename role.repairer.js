@@ -23,15 +23,15 @@ var roleRepairer = {
 		//harves status	
 		if (creep.memory.repairing && creep.carry.energy == 0) {
 			creep.memory.repairing = false;
-			creep.say('🔄 harvest');
+			creep.say('harvest');
 		}
 		else if (!creep.memory.repairing && creep.carry.energy < creep.carryCapacity) {
 			creep.memory.repairing = false;
-			creep.say('🔄 harvest');
+			creep.say('harvest');
 		}
 		else if (!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
 			creep.memory.repairing = true;
-			creep.say('🚧 repair');
+			creep.say('repair');
 		}
 
 		//find not full hits structure to repaier
