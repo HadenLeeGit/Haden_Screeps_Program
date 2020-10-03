@@ -26,13 +26,13 @@ module.exports.loop = function () {
         4. repairer
     */
     var harvestersNum = 3;
-    var upgradersNum = 3;
-    var buildersNum = 4;
+    var upgradersNum = 2;
+    var buildersNum = 3;
     var repairersNum = 2;
 
-    // Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
+    // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify
-    var harvestType = [WORK, WORK, CARRY, MOVE, MOVE];
+    var harvestType = [WORK, WORK, CARRY, MOVE];
 
     //upgrader type modify
     var upgraderType = [WORK, CARRY, CARRY, MOVE, MOVE];
