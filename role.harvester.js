@@ -8,23 +8,29 @@
 
 */
 
+//====================ROLE CONSOLE====================	
+
+    //source acquisition and allocation of role
+    var harvestersSource = 0;
+
+//=======================THE END=======================
+
 var roleHarvester = {
     
     //harvester function
     run: function(creep) { //find and carry SOURCES
 	    if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.harvest(sources[harvestersSource]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[harvestersSource], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
         else { //delivery energy to STRUCTURE
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_TOWER) && 
-                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                                structure.structureType == STRUCTURE_SPAWN )
+                                ;
                     }
             });
             if(targets.length > 0) {

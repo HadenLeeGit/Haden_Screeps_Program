@@ -8,11 +8,18 @@
 
 */
 
+//====================ROLE CONSOLE====================	
+
+    //source acquisition and allocation of role
+    var upgradersSource = 0; 
+
+//=======================THE END=======================
+
 var roleUpgrader = {
 
     //Upgrader function
     run: function(creep) {
-        //harves status if stored energy = o
+        //harvest status if stored energy = o
         if(creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;
             creep.say('🔄 harvest');
@@ -32,8 +39,8 @@ var roleUpgrader = {
         }
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.harvest(sources[upgradersSource]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[upgradersSource], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
 	}

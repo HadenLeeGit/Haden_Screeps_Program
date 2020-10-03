@@ -9,34 +9,41 @@
 
 */
 
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
+var roleHarvester = require('./role.harvester');
+var roleUpgrader = require('./role.upgrader');
+var roleBuilder = require('./role.builder');
+var roleRepairer = require('./role.repairer');
 
 module.exports.loop = function () {
 
-    //====================MAIN CONSOLE====================
-    
+//====================MAIN CONSOLE====================
+
     /*Real-time alive roles number
         Spawning priority
         1. harvester
-        2. builder
-        3. upgrader
+        2. upgrader
+        3. builder
+        4. repairer
     */
-    var harvestersNum = 2;
-    var buildersNum = 2;
-    var upgradersNum = 2; 
+    var harvestersNum = 3;
+    var upgradersNum = 3;
+    var buildersNum = 4;
+    var repairersNum = 2;
 
+    // Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify
-    var harvestType = [WORK, CARRY, MOVE];
-    
-    //builder type modify
-    var builderType = [WORK, CARRY, MOVE];
-    
-    //upgrader type modify
-    var upgraderType = [WORK, CARRY, MOVE];
+    var harvestType = [WORK, WORK, CARRY, MOVE, MOVE];
 
-    //=======================THE END=======================
+    //upgrader type modify
+    var upgraderType = [WORK, CARRY, CARRY, MOVE, MOVE];
+
+    //builder type modify
+    var builderType = [WORK, WORK, CARRY, MOVE];
+
+    //repairer type modify
+    var repairerType = [WORK, CARRY, MOVE, MOVE];
+
+//=======================THE END=======================
 
     /*  var tower = Game.getObjectById('82e26d71767cd2bc3b1f2b70');
         if(tower) {
@@ -62,7 +69,7 @@ module.exports.loop = function () {
         }
     }
 
-    //keep alive harvester creeps not less than 2.
+    //keep alive harvester creeps not less than number in console.
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     console.log('Harvesters: ' + harvesters.length);
 
@@ -72,28 +79,40 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].spawnCreep(harvestType, newName,
             { memory: { role: 'harvester' } });
     }
-    
-    //keep alive builder creeps not less than 2.
-    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-    console.log('Builders: ' + builders.length);
 
-    if (builders.length < buildersNum && harvesters.length > 1) {
-        var newName = 'Builder' + Game.time;
-        console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep(builderType, newName,
-            { memory: { role: 'builder' } });
-    }
-    
-    //keep alive upgrader creeps not less than 2.
+    //keep alive upgrader creeps not less than number in console.
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
 
-    if (upgraders.length < upgradersNum && harvesters.length > 1 && builders.length > 1) {
+    if (upgraders.length < upgradersNum && harvesters.length > 1) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new Upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(upgraderType, newName,
             { memory: { role: 'upgrader' } });
     }
+
+    //keep alive builder creeps not less than number in console.
+    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    console.log('Builders: ' + builders.length);
+
+    if (builders.length < buildersNum && harvesters.length > 1 && upgraders.length > 1) {
+        var newName = 'Builder' + Game.time;
+        console.log('Spawning new builder: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(builderType, newName,
+            { memory: { role: 'builder' } });
+    }
+
+    //keep alive repairer creeps not less than number in console.
+    var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+    console.log('Repairers: ' + repairers.length);
+
+    if (repairers.length < repairersNum && harvesters.length > 1 && builders.length > 1 && upgraders.length > 1) {
+        var newName = 'Repairer' + Game.time;
+        console.log('Spawning new Repairer: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep(repairerType, newName,
+            { memory: { role: 'repairer' } });
+    }
+
 
     //visulize spawning creeps
     if (Game.spawns['Spawn1'].spawning) {
@@ -116,6 +135,9 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+        }
+        if (creep.memory.role == 'repairer') {
+            roleRepairer.run(creep);
         }
     }
 }
