@@ -1,17 +1,17 @@
 /*
     Haden's Screeps program
-	Version 0.4.0
+	Version 0.5
 	
 	<role>
 	"Builder"
-	Version 0.1.0
+	version 0.2
 
 */
 
 //====================ROLE CONSOLE====================	
 
 	//source acquisition and allocation of role
-	var buildersSource = 1;
+	var buildersSource = 0;
 
 //=======================THE END=======================
 

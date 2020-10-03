@@ -1,11 +1,11 @@
 /*
 
     Haden's Screeps program
-    Version 0.4.0
+    Version 0.5
 
     <main>
     main js
-    Version 0.1.3
+    version 0.5
 
 */
 
@@ -29,23 +29,23 @@ module.exports.loop = function () {
         4. defender
         5. repairer / healer
     */
-    var harvestersNum = 2;
+    var harvestersNum = 3;
     var upgradersNum = 3;
-    var buildersNum = 3;
+    var buildersNum = 4;
     var defendersNum = 1;
     var healersNum = 1;
-    var repairersNum = 2;
+    var repairersNum = 1;
 
 
     // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
-    //Harvester type modify
-    var harvestType = [WORK, WORK, CARRY, CARRY, MOVE];
+    //Harvester type modify, ONLY one CARRY part limit before <role> version 0.5
+    var harvestType = [WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
 
     //upgrader type modify
-    var upgraderType = [WORK, WORK, CARRY, CARRY, MOVE];
+    var upgraderType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
 
     //builder type modify
-    var builderType = [WORK, WORK, CARRY, CARRY, MOVE];
+    var builderType = [WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //defender type modify
     var defenderType = [TOUGH, ATTACK, ATTACK, MOVE, MOVE];
@@ -54,7 +54,7 @@ module.exports.loop = function () {
     var healerType = [TOUGH, HEAL, MOVE, MOVE];
     
     //repairer type modify
-    var repairerType = [WORK, CARRY, MOVE, MOVE];
+    var repairerType = [WORK, CARRY, MOVE];
 
 
 //=======================THE END=======================
@@ -98,7 +98,7 @@ module.exports.loop = function () {
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
 
-    if (upgraders.length < upgradersNum && harvesters.length > 2) {
+    if (upgraders.length < upgradersNum && harvesters.length >= 2) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new Upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(upgraderType, newName,
@@ -109,7 +109,7 @@ module.exports.loop = function () {
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     console.log('Builders: ' + builders.length);
 
-    if (builders.length < buildersNum && harvesters.length > 2 && upgraders.length > 1) {
+    if (builders.length < buildersNum && harvesters.length >= 2 && upgraders.length >= 1) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(builderType, newName,
@@ -120,7 +120,7 @@ module.exports.loop = function () {
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'defender');
     console.log('Defenders: ' + defenders.length);
 
-    if (defenders.length < defendersNum && harvesters.length > 2 && upgraders.length > 1) {
+    if (defenders.length < defendersNum && harvesters.length >= 2 && upgraders.length >= 1) {
         var newName = 'Defender' + Game.time;
         console.log('Spawning new defender: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(defenderType, newName,
@@ -131,7 +131,7 @@ module.exports.loop = function () {
     var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healer');
     console.log('Healers: ' + healers.length);
 
-    if (healers.length < healersNum && harvesters.length > 2 && upgraders.length > 1) {
+    if (healers.length < healersNum && harvesters.length >= 2 && defenders.length >= 1) {
         var newName = 'Healer' + Game.time;
         console.log('Spawning new Healer: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(healerType, newName,
@@ -142,7 +142,7 @@ module.exports.loop = function () {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     console.log('Repairers: ' + repairers.length);
 
-    if (repairers.length < repairersNum && harvesters.length > 2 && builders.length > 1 && upgraders.length > 1) {
+    if (repairers.length < repairersNum && harvesters.length >= 2 && builders.length >= 1 && upgraders.length >= 1) {
         var newName = 'Repairer' + Game.time;
         console.log('Spawning new Repairer: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(repairerType, newName,
