@@ -33,7 +33,7 @@ module.exports.loop = function () {
     var upgradersNum = 2;
     var buildersNum = 3;
     var defendersNum = 2;
-    var healersNum = 1;
+    var healersNum = 2;
     var repairersNum = 2;
 
 
