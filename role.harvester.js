@@ -11,7 +11,7 @@
 //====================ROLE CONSOLE====================	
 
     //source acquisition and allocation of role
-    var harvestersSource = 1;
+    var harvestersSource = 0;
 
 //=======================THE END=======================
 
@@ -34,8 +34,8 @@ var roleHarvester = {
                     }
             });
             if(targets.length > 0) {
-                if(creep.transfer(targets[harvestersSource], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[harvestersSource], {visualizePathStyle: {stroke: '#ffffff'}});
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }
