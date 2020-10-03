@@ -32,8 +32,8 @@ module.exports.loop = function () {
     var harvestersNum = 3;
     var upgradersNum = 2;
     var buildersNum = 3;
-    var defendersNum = 2;
-    var healersNum = 2;
+    var defendersNum = 1;
+    var healersNum = 1;
     var repairersNum = 2;
 
 
