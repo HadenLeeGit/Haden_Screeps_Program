@@ -10,7 +10,7 @@
 
 //====================ROLE CONSOLE====================	
 
-    //source acquisition and allocation of role
+//source acquisition and allocation of role
     var harvestersSource = 1;
 
 //=======================THE END=======================
