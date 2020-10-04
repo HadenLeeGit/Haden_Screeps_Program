@@ -1,17 +1,22 @@
 /*
     Haden's Screeps program
-    Version 0.5
+    Version 0.6
 	
     <role>
     "Harvester"
-    version 0.5
+    version 0.6
 
 */
 
 //====================ROLE CONSOLE====================	
 
-//source acquisition and allocation of role
-var harvestersSource = 1;
+    //source acquisition and allocation of role
+    var harvestersSource = 1;
+	
+	//set number >20 to avoid creeps blocked at resource points
+    //set lower number to increase creeps' reaction
+    //Default value = 5, higher number require more CPU source
+    var reusePathNum = 5;
 
 //=======================THE END=======================
 
@@ -35,7 +40,7 @@ var roleHarvester = {
         if (!creep.memory.harvesting) {
             var sources = creep.room.find(FIND_SOURCES);
             if (creep.harvest(sources[harvestersSource]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[harvestersSource], { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(sources[harvestersSource], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffaa00' } });
             }
 
         }
@@ -50,10 +55,10 @@ var roleHarvester = {
             );
             if (targets.length > 0) {
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+                    creep.moveTo(targets[0], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffffff' } });
                 }
                 if (creep.transfer(targets[1], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[1], { visualizePathStyle: { stroke: '#ffffff' } });
+                    creep.moveTo(targets[1], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
         }

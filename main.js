@@ -1,7 +1,7 @@
 /*
 
     Haden's Screeps program
-    Version 0.5
+    Version 0.6
 
     <main>
     main js
@@ -30,8 +30,8 @@ module.exports.loop = function () {
         5. repairer / healer
     */
     var harvestersNum = 2;
-    var upgradersNum = 2;
-    var buildersNum = 3;
+    var upgradersNum = 4;
+    var buildersNum = 1;
     var defendersNum = 1;
     var healersNum = 0;
     var repairersNum = 1;
@@ -42,7 +42,7 @@ module.exports.loop = function () {
     var harvestType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //upgrader type modify
-    var upgraderType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+    var upgraderType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //builder type modify
     var builderType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
@@ -54,7 +54,7 @@ module.exports.loop = function () {
     var healerType = [TOUGH, HEAL, MOVE, MOVE];
     
     //repairer type modify
-    var repairerType = [WORK, CARRY, CARRY, MOVE, MOVE];
+    var repairerType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
 
 
 //=======================THE END=======================
