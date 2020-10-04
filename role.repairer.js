@@ -16,7 +16,7 @@
 	//set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction
     //Default value = 5, higher number require more CPU source
-	var reusePathNum = 10;
+	var reusePathNum = 25;
 
 //=======================THE END=======================	
 
@@ -48,7 +48,7 @@ var roleRepairer = {
 			targets.sort((a, b) => a.hits - b.hits);
 			if (targets.length) {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(targets[0], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffffff' } });
+					creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
 				}
 			}
 		}

@@ -29,23 +29,23 @@ module.exports.loop = function () {
         4. defender
         5. repairer / healer
     */
-    var harvestersNum = 2;
+    var harvestersNum = 3;
     var upgradersNum = 4;
-    var buildersNum = 1;
+    var buildersNum = 0;
     var defendersNum = 1;
     var healersNum = 0;
-    var repairersNum = 1;
+    var repairersNum = 2;
 
 
     // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify, ONLY one CARRY part limit before <role> version 0.5
-    var harvestType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var harvestType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
 
     //upgrader type modify
-    var upgraderType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var upgraderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
 
     //builder type modify
-    var builderType = [WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var builderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
 
     //defender type modify
     var defenderType = [TOUGH, ATTACK, MOVE];

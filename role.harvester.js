@@ -16,7 +16,7 @@
 	//set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction
     //Default value = 5, higher number require more CPU source
-    var reusePathNum = 5;
+    var reusePathNum = 25;
 
 //=======================THE END=======================
 
@@ -55,10 +55,10 @@ var roleHarvester = {
             );
             if (targets.length > 0) {
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffffff' } });
+                    creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
                 }
                 if (creep.transfer(targets[1], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[1], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffffff' } });
+                    creep.moveTo(targets[1], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
         }
