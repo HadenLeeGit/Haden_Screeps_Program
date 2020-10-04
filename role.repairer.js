@@ -11,7 +11,7 @@
 //====================ROLE CONSOLE====================	
 
 	//source acquisition and allocation of role
-	var repairersSource = 0; 
+	var repairersSource = 1; 
 
 //=======================THE END=======================	
 
@@ -23,15 +23,12 @@ var roleRepairer = {
 		//harves status	
 		if (creep.memory.repairing && creep.carry.energy == 0) {
 			creep.memory.repairing = false;
-			creep.say('harvest');
 		}
 		else if (!creep.memory.repairing && creep.carry.energy < creep.carryCapacity) {
 			creep.memory.repairing = false;
-			creep.say('harvest');
 		}
 		else if (!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
 			creep.memory.repairing = true;
-			creep.say('repair');
 		}
 
 		//find not full hits structure to repaier
@@ -43,7 +40,6 @@ var roleRepairer = {
 			if (targets.length) {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
-					creep.say('repair');
 				}
 			}
 		}

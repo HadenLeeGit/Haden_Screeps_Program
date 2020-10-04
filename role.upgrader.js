@@ -11,7 +11,7 @@
 //====================ROLE CONSOLE====================	
 
     //source acquisition and allocation of role
-    var upgradersSource = 0; 
+    var upgradersSource = 1; 
 
 //=======================THE END=======================
 
