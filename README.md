@@ -3,7 +3,7 @@
 ## Introduction
 ---
 This is the program for Screeps.
-It is basically a stable program with all you need in early-stage (before RCL 3).
+It is basically a stable program with all you need in early-stage (before RCL 4).
 
 ## Roles
 ---
