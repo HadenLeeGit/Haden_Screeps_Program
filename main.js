@@ -15,7 +15,7 @@ var roleBuilder = require('./role.builder');
 var roleRepairer = require('./role.repairer');
 var roleDefender = require('./role.defender');
 var roleHealer = require('./role.healer');
-var structureTower = require('./structureTower')
+var structureTower = require('./structure.Tower')
 var stateScanner = require('./stateScanner');
 
 module.exports.loop = function () {
