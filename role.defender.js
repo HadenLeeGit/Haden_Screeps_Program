@@ -1,6 +1,6 @@
 /*
 	Haden's Screeps program
-	Version 0.6
+	Version 0.7
 	
 	<role>
 	"defender"
@@ -9,16 +9,16 @@
 */
 
 //====================ROLE CONSOLE====================	
-	
-	//set number >20 to avoid creeps blocked at resource points
-    //set lower number to increase creeps' reaction
-    //Default value = 5, higher number require more CPU source
-	var reusePathNum = 1;
+
+//set number >20 to avoid creeps blocked at resource points
+//set lower number to increase creeps' reaction
+//Default value = 5, higher number require more CPU source
+var reusePathNum = 1;
 
 //=======================THE END=======================
 
 var roleDefender = {
-	
+
 	//defender function
 	run: function (creep) {
 
@@ -39,11 +39,11 @@ var roleDefender = {
 		if (target) {
 			creep.say('Defend!');
 			if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(target, { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ED1C24' }});
+				creep.moveTo(target, { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ED1C24' } });
 			}
 		}
-
 	}
+
 };
 
 module.exports = roleDefender;

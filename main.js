@@ -1,11 +1,11 @@
 /*
 
     Haden's Screeps program
-    Version 0.6
+    Version 0.7
 
     <main>
     main js
-    version 0.5
+    version 0.6
 
 */
 
@@ -15,7 +15,8 @@ var roleBuilder = require('./role.builder');
 var roleRepairer = require('./role.repairer');
 var roleDefender = require('./role.defender');
 var roleHealer = require('./role.healer');
-
+var structureTower = require('./structureTower')
+var stateScanner = require('./stateScanner');
 
 module.exports.loop = function () {
 
@@ -29,51 +30,39 @@ module.exports.loop = function () {
         4. defender
         5. repairer / healer
     */
-    var harvestersNum = 3;
-    var upgradersNum = 4;
-    var buildersNum = 0;
+    var harvestersNum = 4;
+    var upgradersNum = 3;
+    var buildersNum = 3;
     var defendersNum = 1;
     var healersNum = 0;
     var repairersNum = 2;
 
-
     // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify, ONLY one CARRY part limit before <role> version 0.5
-    var harvestType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
+    var harvestType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //upgrader type modify
-    var upgraderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
+    var upgraderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //builder type modify
-    var builderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE];
+    var builderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //defender type modify
     var defenderType = [TOUGH, ATTACK, MOVE];
-    
+
     //healer type modify
     var healerType = [TOUGH, HEAL, MOVE, MOVE];
     
     //repairer type modify
     var repairerType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
 
+    //enter your room name to active structure tower
+    structureTower.run('E31N17')
 
 //=======================THE END=======================
 
-    /*  var tower = Game.getObjectById('82e26d71767cd2bc3b1f2b70');
-        if(tower) {
-            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_SOURCES, {
-                filter: (structure) => structure.hits < structure.hitsMax
-            });
-            if(closestDamagedStructure) {
-                tower.repair(closestDamagedStructure);
-            }
-    
-            var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            if(closestHostile) {
-                tower.attack(closestHostile);
-            }
-        }
-    */
+    //stateScanner
+    stateScanner.run()
 
     //delete dead creeps in memory.
     for (var name in Memory.creeps) {
@@ -86,14 +75,19 @@ module.exports.loop = function () {
     //keep alive harvester creeps not less than number in console.
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     console.log('Harvesters: ' + harvesters.length);
-
+    
+    //if no modified harvester alive, always keep one basic harvester alive
+    if (harvesters.length == 0) {
+        harvestType = [WORK, CARRY, MOVE];
+    }
+    
     if (harvesters.length < harvestersNum) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(harvestType, newName,
             { memory: { role: 'harvester' } });
     }
-
+    
     //keep alive upgrader creeps not less than number in console.
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
