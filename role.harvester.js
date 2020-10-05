@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-    Version 0.6
+    Version 0.7
 	
     <role>
     "Harvester"
@@ -16,7 +16,7 @@
 	//set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction
     //Default value = 5, higher number require more CPU source
-    var reusePathNum = 25;
+    var reusePathNum = 20;
 
 //=======================THE END=======================
 
@@ -48,17 +48,13 @@ var roleHarvester = {
             //delivery energy to STRUCTURE
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_TOWER) &&
                         structure.energy < structure.energyCapacity;
                 }
-            },
-            );
+            },);
             if (targets.length > 0) {
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
-                }
-                if (creep.transfer(targets[1], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[1], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
         }

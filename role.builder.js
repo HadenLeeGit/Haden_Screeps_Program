@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-	Version 0.6
+	Version 0.7
 	
 	<role>
 	"Builder"
@@ -11,7 +11,7 @@
 //====================ROLE CONSOLE====================	
 
 	//source acquisition and allocation of role
-	var buildersSource = 1;
+	var buildersSource = 0;
 	
 	//set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction
