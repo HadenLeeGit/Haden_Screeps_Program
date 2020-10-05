@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-    Version 0.6
+    Version 0.7
 	
     <role>
     "healer"

@@ -1,6 +1,6 @@
 /*
     Haden's Screeps program
-	Version 0.6
+	Version 0.7
 	
 	<role>
 	"Upgrader"
@@ -16,7 +16,7 @@
     //set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction
     //Default value = 5, higher number require more CPU source
-    var reusePathNum = 50;
+    var reusePathNum = 25;
 
 //=======================THE END=======================
 
@@ -39,7 +39,7 @@ var roleUpgrader = {
         //update controller and harvest function
 	    if(creep.memory.upgrading) {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, { reusePath: reusePathNum, visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveTo(creep.room.controller, { reusePath: 3, visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
         else {
