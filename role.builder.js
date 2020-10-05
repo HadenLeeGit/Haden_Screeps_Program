@@ -11,7 +11,7 @@
 //====================ROLE CONSOLE====================	
 
 	//source acquisition and allocation of role
-	var buildersSource = 0;
+	var buildersSource = 1;
 	
 	//set number >20 to avoid creeps blocked at resource points
     //set lower number to increase creeps' reaction

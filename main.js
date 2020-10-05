@@ -32,20 +32,20 @@ module.exports.loop = function () {
     */
     var harvestersNum = 4;
     var upgradersNum = 3;
-    var buildersNum = 3;
+    var buildersNum = 2;
     var defendersNum = 1;
     var healersNum = 0;
     var repairersNum = 2;
 
     // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
     //Harvester type modify, ONLY one CARRY part limit before <role> version 0.5
-    var harvestType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var harvestType = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, CARRY, MOVE, MOVE, MOVE];
 
     //upgrader type modify
-    var upgraderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var upgraderType = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, CARRY, MOVE, MOVE, MOVE];
 
     //builder type modify
-    var builderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var builderType = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, CARRY, MOVE, MOVE, MOVE]; 
 
     //defender type modify
     var defenderType = [TOUGH, ATTACK, MOVE];
@@ -54,15 +54,17 @@ module.exports.loop = function () {
     var healerType = [TOUGH, HEAL, MOVE, MOVE];
     
     //repairer type modify
-    var repairerType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+    var repairerType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
 
     //enter your room name to active structure tower
     structureTower.run('E31N17')
+    
+    //enter your room name to active stateScanner
+    stateScanner.run('E31N17')
 
 //=======================THE END=======================
 
-    //stateScanner
-    stateScanner.run()
+
 
     //delete dead creeps in memory.
     for (var name in Memory.creeps) {
