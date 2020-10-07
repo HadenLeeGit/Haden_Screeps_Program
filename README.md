@@ -12,7 +12,7 @@ It is basically a stable program with all you need in early-stage (when RCL <= 4
 #### 2. upgrader
     harvest source and move energy to RCL
 #### 3. builder
-    harvest source and go to build
+    harvest source and go to build. if all construction sites finished, it will do repairers' work
 #### 4. defender
     if find the enemy in the room, it will give info to the console log and find the enemy location to attack immediately
 #### 5. healer
