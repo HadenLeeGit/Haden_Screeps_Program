@@ -64,7 +64,7 @@ var roleBuilder = {
 				}
 			}	
 		}
-	    else {//harvest sources
+	    else if (constructionSitesNum == 0 && creep.store[RESOURCE_ENERGY] == 0) {//harvest sources
 	        var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[buildersSource]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[buildersSource], { reusePath: buildersReaction, visualizePathStyle: {stroke: '#ffaa00'}});
