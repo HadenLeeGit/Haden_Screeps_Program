@@ -41,11 +41,23 @@ var roleBuilder = {
 			const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
 					//ADD structureType || structureType to repair chosen structures
-					return (structure.structureType == STRUCTURE_CONTAINER) &&
+					return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_RAMPART) &&
                         structure.hits < structure.hitsMax;
                 }
             },);
-			targets.sort((a, b) => a.hits - b.hits);
+			targets.sort(
+				function (a, b) {
+					var aHitsPercent = a.hits/a.hitsMax
+					var bHitsPercent = b.hits/b.hitsMax
+					if (aHitsPercent < bHitsPercent) {
+						return -1;
+					} else if (aHitsPercent > bHitsPercent) {
+						return 1;
+					} else {
+						return 0
+					}					
+				}
+			);
 			if (targets.length) {
 				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
