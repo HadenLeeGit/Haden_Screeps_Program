@@ -1,24 +1,17 @@
 /*
 
     Haden's Screeps program
-    Version 0.7
+    Version 0.8
 
     <main>
     stateScanner js
-    version 0.6
+    version 0.7
 
 */
 
-//========================CONSOLE========================	
-
-//run set up tick per time
-var stateScannerTick = 5;
-
-//=======================THE END=======================
-
 var stateScanner = {
 
-    run: function (myRoomName) {
+    run: function (myRoomName, stateScannerTick) {
 
         // run 20 tick per time
         if (Game.time % stateScannerTick) return

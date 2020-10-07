@@ -1,26 +1,17 @@
 /*
     Haden's Screeps program
-    Version 0.7
+    Version 0.8
 	
     <role>
     "healer"
-    version 0.3
+    version 0.4
 
 */
-
-//====================ROLE CONSOLE====================	
-    	
-	//set number >20 to avoid creeps blocked at resource points
-    //set lower number to increase creeps' reaction
-    //Default value = 5, higher number require more CPU source
-    var reusePathNum = 1;
-
-//=======================THE END=======================
 
 var roleHealer = {
 
     //healer function
-    run: function (creep) {
+    run: function (creep, healersReaction) {
 
         //healer status
         const targets = creep.pos.findClosestByRange(FIND_MY_CREEPS, {
@@ -31,7 +22,7 @@ var roleHealer = {
         if (targets != null) {
             targets.sort((a, b) => a.hits - b.hits); if (targets.length) {
                 if (creep.heal(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#0000FF' } });
+                    creep.moveTo(targets[0], { reusePath: healersReaction, visualizePathStyle: { stroke: '#0000FF' } });
                 }
             }
         }
