@@ -1,11 +1,11 @@
 /*
 
     Haden's Screeps program
-    Version 0.7
+    Version 0.8
 
     <main>
     main js
-    version 0.6
+    version 0.7
 
 */
 
@@ -22,47 +22,54 @@ module.exports.loop = function () {
 
 //====================MAIN CONSOLE====================
 
-    /*Real-time alive roles number
-        Spawning priority
-        1. harvester
-        2. upgrader
-        3. builder
-        4. defender
-        5. repairer / healer
-    */
-    var harvestersNum = 4;
-    var upgradersNum = 3;
-    var buildersNum = 3;
-    var defendersNum = 1;
+    //Real-time alive roles number
+    //harvester and upgrader have high spawning priority
+    var harvestersNum = 3;
+    var upgradersNum = 4;
+    var buildersNum = 0;
+    var defendersNum = 0;
     var healersNum = 0;
-    var repairersNum = 2;
+    var repairersNum = 3;
 
-    // WORK = 100, Any non-THOUGH part above 5 will use 200 energy that sits inside a random extension with enough energy.
-    //Harvester type modify, ONLY one CARRY part limit before <role> version 0.5
-    var harvestType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    //creeps type modify by roles
+    var harvestType = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
 
-    //upgrader type modify
-    var upgraderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var upgraderType = [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE];
 
-    //builder type modify
-    var builderType = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+    var builderType = [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]; 
 
-    //defender type modify
     var defenderType = [TOUGH, ATTACK, MOVE];
 
-    //healer type modify
     var healerType = [TOUGH, HEAL, MOVE, MOVE];
-    
-    //repairer type modify
-    var repairerType = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+
+    var repairerType = [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
+
+    //source acquisition and allocation of role
+    var harvestersSource = 1;
+    var upgradersSource = 0; 
+    var buildersSource = 0;
+    var repairersSource = 1;
+
+    //set number >20 to avoid creeps blocked at resource points
+    //set lower number to increase creeps' reaction
+    //Default value = 5, higher number require more CPU source
+    var harvestersReaction = 5;
+    var upgradersReaction = 5;
+    var buildersReaction = 5;
+    var repairersReaction = 20;
+    var healersReaction = 1;
+    var defendersReaction = 1;
 
     //enter your room name to active structure tower
     structureTower.run('E31N17')
+    
+    //enter your <roomName> and <stateScannerTick> to active stateScanner
+    //<stateScannerTick>: run set up tick per time
+    stateScanner.run('E31N17', 5)
 
 //=======================THE END=======================
 
-    //stateScanner
-    stateScanner.run()
+
 
     //delete dead creeps in memory.
     for (var name in Memory.creeps) {
@@ -136,7 +143,7 @@ module.exports.loop = function () {
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     console.log('Repairers: ' + repairers.length);
 
-    if (repairers.length < repairersNum && harvesters.length >= 2 && builders.length >= 1 && upgraders.length >= 1) {
+    if (repairers.length < repairersNum && harvesters.length >= 2 && builders.length >= buildersNum && upgraders.length >= 1) {
         var newName = 'Repairer' + Game.time;
         console.log('Spawning new Repairer: ' + newName);
         Game.spawns['Spawn1'].spawnCreep(repairerType, newName,
@@ -158,22 +165,22 @@ module.exports.loop = function () {
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
         if (creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
+            roleHarvester.run(creep, harvestersSource, harvestersReaction);
         }
         if (creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
+            roleUpgrader.run(creep, upgradersSource, upgradersReaction);
         }
         if (creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
+            roleBuilder.run(creep, buildersSource, buildersReaction);
         }
         if (creep.memory.role == 'defender') {
-            roleDefender.run(creep);
+            roleDefender.run(creep, defendersReaction);
         }
         if (creep.memory.role == 'healer') {
-            roleHealer.run(creep);
+            roleHealer.run(creep, healersReaction);
         }
         if (creep.memory.role == 'repairer') {
-            roleRepairer.run(creep);
+            roleRepairer.run(creep, repairersSource, repairersReaction);
         }
     }
 }

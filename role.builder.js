@@ -1,28 +1,16 @@
 /*
     Haden's Screeps program
-	Version 0.7
+	Version 0.8
 	
 	<role>
 	"Builder"
-	version 0.3
+	version 0.5
 
 */
 
-//====================ROLE CONSOLE====================	
-
-	//source acquisition and allocation of role
-	var buildersSource = 0;
-	
-	//set number >20 to avoid creeps blocked at resource points
-    //set lower number to increase creeps' reaction
-    //Default value = 5, higher number require more CPU source
-	var reusePathNum = 25;
-
-//=======================THE END=======================
-
 var roleBuilder = {
 
-    run: function(creep) {
+    run: function(creep, buildersSource, buildersReaction) {
 
 		//builder status
 	    if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
@@ -33,20 +21,41 @@ var roleBuilder = {
 	        creep.memory.building = true;
 	        creep.say('build');
 	    }
-
+		
 		//builder function
-	    if(creep.memory.building) {
+	    if(creep.memory.building) {//do builders work
 	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if(targets.length) {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-	    }
-	    else {
+	    } else {//harvest sources
 	        var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[buildersSource]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[buildersSource], { reusePath: reusePathNum, visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveTo(sources[buildersSource], { reusePath: buildersReaction, visualizePathStyle: {stroke: '#ffaa00'}});
+            }
+		}
+		var constructionSitesNum = Object.keys(Game.constructionSites).length
+		if (constructionSitesNum == 0) {//if no construction sites, do repairers work
+			const targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+					//ADD structureType || structureType to repair chosen structures
+					return (structure.structureType == STRUCTURE_CONTAINER) &&
+                        structure.hits < structure.hitsMax;
+                }
+            },);
+			targets.sort((a, b) => a.hits - b.hits);
+			if (targets.length) {
+				if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(targets[0], { reusePath: 3, visualizePathStyle: { stroke: '#ffffff' } });
+				}
+			}	
+		}
+	    else {//harvest sources
+	        var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[buildersSource]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[buildersSource], { reusePath: buildersReaction, visualizePathStyle: {stroke: '#ffaa00'}});
             }
 	    }
 	}

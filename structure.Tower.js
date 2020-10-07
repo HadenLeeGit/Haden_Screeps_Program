@@ -1,17 +1,12 @@
 /*
 	Haden's Screeps program
-	Version 0.7
+	Version 0.8
 	
 	<structure>
 	"tower"
-	version 0.4
+	version 0.5
 
 */
-
-//=======================CONSOLE=======================	
-
-
-//=======================THE END=======================
 
 var structureTower = {
 

@@ -1,29 +1,17 @@
 /*
     Haden's Screeps program
-    Version 0.7
+    Version 0.8
 	
     <role>
     "Harvester"
-    version 0.6
+    version 0.7
 
 */
-
-//====================ROLE CONSOLE====================	
-
-    //source acquisition and allocation of role
-    var harvestersSource = 1;
-	
-	//set number >20 to avoid creeps blocked at resource points
-    //set lower number to increase creeps' reaction
-    //Default value = 5, higher number require more CPU source
-    var reusePathNum = 20;
-
-//=======================THE END=======================
 
 var roleHarvester = {
 
     //harvester function
-    run: function (creep) {
+    run: function (creep, harvestersSource, harvestersReaction) {
         //harvest status if stored energy = o
         if(creep.memory.harvesting && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.harvesting = false;
@@ -40,7 +28,7 @@ var roleHarvester = {
         if (!creep.memory.harvesting) {
             var sources = creep.room.find(FIND_SOURCES);
             if (creep.harvest(sources[harvestersSource]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[harvestersSource], { reusePath: reusePathNum, visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(sources[harvestersSource], { reusePath: harvestersReaction, visualizePathStyle: { stroke: '#ffaa00' } });
             }
 
         }
@@ -48,7 +36,7 @@ var roleHarvester = {
             //delivery energy to STRUCTURE
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_TOWER) &&
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
                         structure.energy < structure.energyCapacity;
                 }
             },);

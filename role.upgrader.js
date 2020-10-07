@@ -1,29 +1,17 @@
 /*
     Haden's Screeps program
-	Version 0.7
+	Version 0.8
 	
 	<role>
 	"Upgrader"
-    version 0.3
+    version 0.4
 
 */
-
-//====================ROLE CONSOLE====================	
-
-    //source acquisition and allocation of role
-    var upgradersSource = 0; 
-    
-    //set number >20 to avoid creeps blocked at resource points
-    //set lower number to increase creeps' reaction
-    //Default value = 5, higher number require more CPU source
-    var reusePathNum = 25;
-
-//=======================THE END=======================
 
 var roleUpgrader = {
 
     //Upgrader function
-    run: function(creep) {
+    run: function(creep, upgradersSource, upgradersReaction) {
         //harvest status if stored energy = o
         if(creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
             creep.memory.upgrading = false;
@@ -45,7 +33,7 @@ var roleUpgrader = {
         else {
             var sources = creep.room.find(FIND_SOURCES_ACTIVE);
             if(creep.harvest(sources[upgradersSource]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[upgradersSource], { reusePath: reusePathNum, visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveTo(sources[upgradersSource], { reusePath: upgradersReaction, visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
 	}
