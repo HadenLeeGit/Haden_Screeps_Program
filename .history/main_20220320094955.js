@@ -128,6 +128,7 @@ module.exports.loop = function () {
             { memory: { role: 'defender' } });
     }
     
+
     //keep alive healer creeps not less than number in console.
     var healers = _.filter(Game.creeps, (creep) => creep.memory.role == 'healer');
     console.log('Healers: ' + healers.length);
@@ -138,6 +139,7 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].spawnCreep(healerType, newName,
             { memory: { role: 'healer' } });
     }
+
     //keep alive repairer creeps not less than number in console.
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     console.log('Repairers: ' + repairers.length);

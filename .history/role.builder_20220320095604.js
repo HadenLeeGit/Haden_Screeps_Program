@@ -14,7 +14,7 @@ var roleBuilder = {
 
 		//builder status
 	    if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
-            creep.memory.building = false;
+         creep.memory.building = false;
             creep.say('harvest');
 	    }
 	    if(!creep.memory.building && creep.store.getFreeCapacity() == 0) {
@@ -41,7 +41,7 @@ var roleBuilder = {
 			const targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
 					//ADD structureType || structureType to repair chosen structures
-						return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_RAMPART) &&
+					return (structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_ROAD || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_RAMPART) &&
                         structure.hits < structure.hitsMax;
                 }
             },);

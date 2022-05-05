@@ -138,6 +138,7 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].spawnCreep(healerType, newName,
             { memory: { role: 'healer' } });
     }
+//TODO
     //keep alive repairer creeps not less than number in console.
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     console.log('Repairers: ' + repairers.length);
